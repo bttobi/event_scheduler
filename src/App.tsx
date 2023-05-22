@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import Modal from "./components/Modal";
+import Alert from "./components/Alert";
 
 const App: React.FC = () => {
   const [clickedDay, setClickedDay] = useState<Date>();
@@ -38,6 +39,7 @@ const App: React.FC = () => {
           className="modal-toggle"
         />
         <Modal clickedDay={clickedDay} />
+        <Alert errorHappened={true} notificationMessage="test" />
       </motion.main>
     </AnimatePresence>
   );
