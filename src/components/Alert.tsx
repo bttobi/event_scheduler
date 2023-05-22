@@ -7,7 +7,7 @@ const Alert: React.FC<{
   return (
     <div
       className={
-        "alert shadow-lg w-96 " +
+        "alert shadow-lg w-96 absolute top-20 bottom-auto " +
         (errorHappened ? "alert-error" : "alert-success")
       }
     >
