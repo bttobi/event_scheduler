@@ -8,8 +8,8 @@ const Modal: React.FC<{ clickedDay: Date | undefined }> = ({ clickedDay }) => {
   const inputEmailRef = useRef<HTMLInputElement>(null);
   return (
     <>
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box flex flex-col justify-center align-center items-center">
+      <label htmlFor="my-modal-6" className="modal cursor-pointer">
+        <label className="modal-box relative flex flex-col justify-center align-center items-center ">
           <div className="right-2 absolute top-2">
             <label
               htmlFor="my-modal-6"
@@ -65,9 +65,9 @@ const Modal: React.FC<{ clickedDay: Date | undefined }> = ({ clickedDay }) => {
           >
             Zatwierdź wizytę
           </button>
-        </div>
+        </label>
         <Alert errorHappened={true} notificationMessage="test" />
-      </div>
+      </label>
     </>
   );
 };
