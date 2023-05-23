@@ -38,6 +38,7 @@ const App: React.FC = () => {
           className="modal-toggle"
         />
         <Modal clickedDay={clickedDay} />
+        <p className="text-2xl mt-8 text-white">Legenda:</p>
       </motion.main>
     </AnimatePresence>
   );
