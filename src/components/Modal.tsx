@@ -1,10 +1,15 @@
 import { useState, useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AnimatePresence } from "framer-motion";
+import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import addDate from "../functions/addDate";
 import Alert from "./Alert";
 
-const Modal: React.FC<{ clickedDay: Date | undefined }> = ({ clickedDay }) => {
+const Modal: React.FC<{
+  clickedDay: Date | undefined;
+  takenHours: string[];
+  isFetching: boolean;
+}> = ({ clickedDay, takenHours, isFetching }) => {
   const inputHourRef = useRef<HTMLInputElement>(null);
   const inputEmailRef = useRef<HTMLInputElement>(null);
   const [notificationMessage, setNotificationMessage] = useState<string>("");
@@ -53,17 +58,25 @@ const Modal: React.FC<{ clickedDay: Date | undefined }> = ({ clickedDay }) => {
         <p className="text-2xl mb-8 text-blue-500">{`${clickedDay?.getDate()}.${
           clickedDay && clickedDay?.getMonth() + 1
         }.${clickedDay?.getFullYear()}`}</p>
-        <p className="text-red-400 text-xl font-bold">Zajęte godziny to:</p>
-        <ul className="mb-8 max-w-32 overflow-y-auto flex gap-2 flex-wrap justify-center items-center align-center">
-          <li>17:00 </li>
-          <li>18:00 </li>
-          <li>18:00 </li>
-          <li>18:00 </li>
-          <li>18:00 </li>
-          <li>18:00 </li>
-          <li>17:00 </li>
-          <li>18:00 </li>
-        </ul>
+        {isFetching ? (
+          <div className="mb-8">
+            <TailSpin />
+          </div>
+        ) : takenHours.length == 0 ? (
+          <p className="text-green-400 text-xl font-bold mb-4">
+            Cały dzień wolny
+          </p>
+        ) : (
+          <>
+            <p className="text-red-400 text-xl font-bold">Zajęte godziny to:</p>
+            <ul className="mb-8 max-w-32 overflow-y-auto flex gap-2 flex-wrap justify-center items-center align-center">
+              {takenHours.map((day) => {
+                return <li key={day}>{day}</li>;
+              })}
+            </ul>
+          </>
+        )}
+
         <label htmlFor="hour">Wybierz godzinę:</label>
         <input
           name="hour"
