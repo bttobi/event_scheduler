@@ -1,9 +1,14 @@
+import { motion, AnimatePresence } from "framer-motion";
+
 const Alert: React.FC<{
   errorHappened: boolean;
   notificationMessage: string;
 }> = ({ errorHappened, notificationMessage }) => {
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className={
         "alert shadow-lg w-96 absolute top-20 bottom-auto " +
         (errorHappened ? "alert-error" : "alert-success")
@@ -41,7 +46,7 @@ const Alert: React.FC<{
         )}
         <span>{notificationMessage}</span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
