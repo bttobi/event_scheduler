@@ -1,11 +1,43 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { AnimatePresence } from "framer-motion";
 import addDate from "../functions/addDate";
 import Alert from "./Alert";
 
 const Modal: React.FC<{ clickedDay: Date | undefined }> = ({ clickedDay }) => {
   const inputHourRef = useRef<HTMLInputElement>(null);
   const inputEmailRef = useRef<HTMLInputElement>(null);
+  const [notificationMessage, setNotificationMessage] = useState<string>("");
+  const [showNotification, setShowNotification] = useState<boolean>(false);
+  const [errorHappened, setErrorHappened] = useState<boolean>(false);
+
+  const postToDb = () => {
+    if (inputHourRef.current && inputEmailRef.current) {
+      try {
+        addDate(
+          clickedDay,
+          inputHourRef.current.value,
+          inputEmailRef.current.value
+        );
+        setErrorHappened(false);
+        setNotificationMessage("Dodano rezerwację!");
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 2000);
+      } catch (error: any) {
+        setErrorHappened(true);
+        setNotificationMessage(
+          "Błąd podczas dodawania rezerwacji - spróbuj ponownie..."
+        );
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 2000);
+      }
+    }
+  };
+
   return (
     <label htmlFor="my-modal-6" className="modal cursor-pointer">
       <label className="modal-box relative flex flex-col justify-center align-center items-center ">
@@ -51,21 +83,18 @@ const Modal: React.FC<{ clickedDay: Date | undefined }> = ({ clickedDay }) => {
           ref={inputEmailRef}
           required
         />
-        <button
-          className="btn btn-success mt-8"
-          onClick={() => {
-            if (inputHourRef.current && inputEmailRef.current)
-              addDate(
-                clickedDay,
-                inputHourRef.current.value,
-                inputEmailRef.current.value
-              );
-          }}
-        >
+        <button className="btn btn-success mt-8" onClick={postToDb}>
           Zatwierdź wizytę
         </button>
       </label>
-      <Alert errorHappened={true} notificationMessage="test" />
+      <AnimatePresence>
+        {showNotification && (
+          <Alert
+            errorHappened={errorHappened}
+            notificationMessage={notificationMessage}
+          />
+        )}
+      </AnimatePresence>
     </label>
   );
 };
