@@ -15,9 +15,11 @@ const Modal: React.FC<{
   const [notificationMessage, setNotificationMessage] = useState<string>("");
   const [showNotification, setShowNotification] = useState<boolean>(false);
   const [errorHappened, setErrorHappened] = useState<boolean>(false);
+  const [isPostingToDb, setIsPostingToDb] = useState<boolean>(false);
 
   const postToDb = () => {
     if (inputHourRef.current && inputEmailRef.current) {
+      setIsPostingToDb(true);
       try {
         addDate(
           clickedDay,
@@ -39,6 +41,8 @@ const Modal: React.FC<{
         setTimeout(() => {
           setShowNotification(false);
         }, 2000);
+      } finally {
+        setIsPostingToDb(false);
       }
     }
   };
@@ -96,8 +100,8 @@ const Modal: React.FC<{
           ref={inputEmailRef}
           required
         />
-        <button className="btn btn-success mt-8" onClick={postToDb}>
-          Zatwierdź wizytę
+        <button className="btn btn-success mt-8 w-32" onClick={postToDb}>
+          {isPostingToDb ? <TailSpin /> : "Zatwierdź wizytę"}
         </button>
       </label>
       <AnimatePresence>
