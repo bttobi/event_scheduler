@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import addDate from "../functions/addDate";
 import Alert from "./Alert";
@@ -29,20 +29,17 @@ const Modal: React.FC<{
         setErrorHappened(false);
         setNotificationMessage("Dodano rezerwację!");
         setShowNotification(true);
-        setTimeout(() => {
-          setShowNotification(false);
-        }, 2000);
       } catch (error: any) {
         setErrorHappened(true);
         setNotificationMessage(
           "Błąd podczas dodawania rezerwacji - spróbuj ponownie..."
         );
         setShowNotification(true);
+      } finally {
+        setIsPostingToDb(false);
         setTimeout(() => {
           setShowNotification(false);
         }, 2000);
-      } finally {
-        setIsPostingToDb(false);
       }
     }
   };
@@ -62,24 +59,48 @@ const Modal: React.FC<{
         <p className="text-2xl mb-8 text-blue-500">{`${clickedDay?.getDate()}.${
           clickedDay && clickedDay?.getMonth() + 1
         }.${clickedDay?.getFullYear()}`}</p>
-        {isFetching ? (
-          <div className="mb-8">
-            <TailSpin />
-          </div>
-        ) : takenHours.length == 0 ? (
-          <p className="text-green-400 text-xl font-bold mb-4">
-            Cały dzień wolny
-          </p>
-        ) : (
-          <>
-            <p className="text-red-400 text-xl font-bold">Zajęte godziny to:</p>
-            <ul className="mb-8 max-w-32 overflow-y-auto flex gap-2 flex-wrap justify-center items-center align-center">
-              {takenHours.map((day) => {
-                return <li key={day}>{day}</li>;
-              })}
-            </ul>
-          </>
-        )}
+        <AnimatePresence>
+          {isFetching ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="mb-8"
+            >
+              <TailSpin />
+            </motion.div>
+          ) : takenHours.length == 0 ? (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="text-green-400 text-xl font-bold mb-4"
+            >
+              Cały dzień wolny
+            </motion.p>
+          ) : (
+            <>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-red-400 text-xl font-bold"
+              >
+                Zajęte godziny to:
+              </motion.p>
+              <motion.ul
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="mb-8 max-w-32 overflow-y-auto flex gap-2 flex-wrap justify-center items-center align-center"
+              >
+                {takenHours.map((day) => {
+                  return <li key={day}>{day}</li>;
+                })}
+              </motion.ul>
+            </>
+          )}
+        </AnimatePresence>
 
         <label htmlFor="hour">Wybierz godzinę:</label>
         <input
@@ -101,7 +122,23 @@ const Modal: React.FC<{
           required
         />
         <button className="btn btn-success mt-8 w-32" onClick={postToDb}>
-          {isPostingToDb ? <TailSpin /> : "Zatwierdź wizytę"}
+          {isPostingToDb ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <TailSpin />
+            </motion.div>
+          ) : (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              Zatwierdź wizytę
+            </motion.p>
+          )}
         </button>
       </label>
       <AnimatePresence>
