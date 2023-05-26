@@ -12,9 +12,10 @@ const getTakenHours = async (
   const collectionRef = await collection(db, dateToCheck);
   const docsSnap = await getDocs(collectionRef);
   docsSnap.forEach((doc) => {
+    console.log(doc.data);
     documents.push(doc.data().hour);
   });
-  return documents;
+  return documents.sort();
 };
 
 export default getTakenHours;
