@@ -1,21 +1,23 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import addDate from "../functions/addDate";
 import Alert from "./Alert";
+import getTakenHours from "../functions/getTakenHours";
 
 const Modal: React.FC<{
   clickedDay: Date | undefined;
-  takenHours: string[];
-  isFetching: boolean;
-}> = ({ clickedDay, takenHours, isFetching }) => {
+}> = ({ clickedDay }) => {
   const inputHourRef = useRef<HTMLInputElement>(null);
   const inputEmailRef = useRef<HTMLInputElement>(null);
   const [notificationMessage, setNotificationMessage] = useState<string>("");
   const [showNotification, setShowNotification] = useState<boolean>(false);
   const [errorHappened, setErrorHappened] = useState<boolean>(false);
+  const [errorHours, setErrorHours] = useState<boolean>(false);
   const [isPostingToDb, setIsPostingToDb] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [takenHours, setTakenHours] = useState<string[]>([""]);
 
   const postToDb = () => {
     if (inputHourRef.current && inputEmailRef.current) {
@@ -43,6 +45,19 @@ const Modal: React.FC<{
       }
     }
   };
+
+  useEffect(() => {
+    setIsFetching(true);
+    try {
+      getTakenHours(clickedDay).then((res) => {
+        setTakenHours(res);
+      });
+      setErrorHours(false);
+    } catch (errors: any) {
+      setErrorHours(true);
+    }
+    setIsFetching(false);
+  }, [clickedDay]);
 
   return (
     <label htmlFor="my-modal-6" className="modal cursor-pointer">
@@ -94,9 +109,15 @@ const Modal: React.FC<{
                 exit={{ opacity: 0 }}
                 className="mb-8 max-w-32 overflow-y-auto flex gap-2 flex-wrap justify-center items-center align-center"
               >
-                {takenHours.map((day) => {
-                  return <li key={day}>{day}</li>;
-                })}
+                {errorHours ? (
+                  <li>
+                    Wystąpił błąd podczas wczytywania godzin - spróbuj ponownie
+                  </li>
+                ) : (
+                  takenHours.map((day) => {
+                    return <li key={day}>{day}</li>;
+                  })
+                )}
               </motion.ul>
             </>
           )}

@@ -7,8 +7,6 @@ import getTakenHours from "./functions/getTakenHours";
 
 const App: React.FC = () => {
   const [clickedDay, setClickedDay] = useState<Date>();
-  const [takenHours, setTakenHours] = useState<string[]>([]);
-  const [isFetching, setIsFetching] = useState<boolean>(false);
   const modalInputRef = useRef<HTMLInputElement>(null);
 
   const makeAppointment = (day: Date) => {
@@ -16,16 +14,6 @@ const App: React.FC = () => {
     if (modalInputRef.current) {
       modalInputRef.current.checked = true;
     }
-  };
-
-  const displayTakenDays = async (value: Date) => {
-    setIsFetching(true);
-    let response: string[] = [];
-    await getTakenHours(value).then((res) => {
-      response = res;
-    });
-    setTakenHours(response);
-    setIsFetching(false);
   };
 
   return (
@@ -40,7 +28,6 @@ const App: React.FC = () => {
         <Calendar
           locale="pl"
           onClickDay={(value) => {
-            displayTakenDays(value);
             makeAppointment(value);
           }}
           className="text-slate-800 bg-sky-700 rounded-lg lg:w-1/2 w-full text-3xl pb-4"
@@ -51,11 +38,7 @@ const App: React.FC = () => {
           id="my-modal-6"
           className="modal-toggle"
         />
-        <Modal
-          takenHours={takenHours}
-          clickedDay={clickedDay}
-          isFetching={isFetching}
-        />
+        <Modal clickedDay={clickedDay} />
         <p className="text-2xl mt-8 text-white">Legenda:</p>
       </motion.main>
     </AnimatePresence>
