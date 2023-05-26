@@ -1,5 +1,5 @@
 import db from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, getDoc } from "firebase/firestore";
 
 const getTakenHours = async (
   stringDate: Date | undefined
@@ -11,10 +11,13 @@ const getTakenHours = async (
   const documents: string[] = [];
   const collectionRef = await collection(db, dateToCheck);
   const docsSnap = await getDocs(collectionRef);
-  docsSnap.forEach((doc) => {
-    console.log(doc.data);
-    documents.push(doc.data().hour);
-  });
+
+  if (docsSnap) {
+    docsSnap.forEach((doc) => {
+      documents.push(doc.data().hour);
+    });
+  }
+
   return documents.sort();
 };
 
