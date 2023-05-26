@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "daisyui": "^2.51.6",
-    "firebase": "^9.22.0",
+    "firebase": "^9.22.1",
     "framer-motion": "^10.12.12",
     "react": "^18.2.0",
     "react-calendar": "^4.2.1",
