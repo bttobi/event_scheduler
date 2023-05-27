@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Alert: React.FC<{
   errorHappened: boolean;
@@ -10,7 +10,7 @@ const Alert: React.FC<{
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className={
-        "alert shadow-lg w-96 absolute top-20 bottom-auto " +
+        "alert absolute bottom-auto top-0 w-96 shadow-lg " +
         (errorHappened ? "alert-error" : "alert-success")
       }
     >
@@ -18,7 +18,7 @@ const Alert: React.FC<{
         {!errorHappened ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="stroke-current flex-shrink-0 h-6 w-6"
+            className="h-6 w-6 flex-shrink-0 stroke-current"
             fill="none"
             viewBox="0 0 24 24"
           >
@@ -32,7 +32,7 @@ const Alert: React.FC<{
         ) : (
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="stroke-current flex-shrink-0 h-6 w-6"
+            className="h-6 w-6 flex-shrink-0 stroke-current"
             fill="none"
             viewBox="0 0 24 24"
           >
