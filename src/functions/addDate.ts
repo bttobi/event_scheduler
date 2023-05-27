@@ -17,6 +17,11 @@ const addDate = async (date: Date | undefined, hour: string, email: string) => {
   }
 
   await setDoc(documentRef, { hour: hour, email: email, hasPaid: false });
+
+  //setting a day to collection of days
+  const collectionDaysRef = await collection(db, "list_of_days");
+  const documentDayRef = await doc(collectionDaysRef, stringDate);
+  await setDoc(documentDayRef, { day: stringDate });
 };
 
 export default addDate;
