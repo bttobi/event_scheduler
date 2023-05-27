@@ -1,50 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
-import addDate from "../functions/addDate";
-import Alert from "./Alert";
+import Form from "./Form";
 import getTakenHours from "../functions/getTakenHours";
 
 const Modal: React.FC<{
   clickedDay: Date | undefined;
 }> = ({ clickedDay }) => {
-  const inputHourRef = useRef<HTMLInputElement>(null);
-  const inputEmailRef = useRef<HTMLInputElement>(null);
-  const [notificationMessage, setNotificationMessage] = useState<string>("");
-  const [showNotification, setShowNotification] = useState<boolean>(false);
-  const [errorHappened, setErrorHappened] = useState<boolean>(false);
   const [errorHours, setErrorHours] = useState<boolean>(false);
-  const [isPostingToDb, setIsPostingToDb] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [takenHours, setTakenHours] = useState<string[]>([""]);
-
-  const postToDb = () => {
-    if (inputHourRef.current && inputEmailRef.current) {
-      setIsPostingToDb(true);
-      try {
-        addDate(
-          clickedDay,
-          inputHourRef.current.value,
-          inputEmailRef.current.value
-        );
-        setErrorHappened(false);
-        setNotificationMessage("Dodano rezerwację!");
-        setShowNotification(true);
-      } catch (error: any) {
-        setErrorHappened(true);
-        setNotificationMessage(
-          "Błąd podczas dodawania rezerwacji - spróbuj ponownie..."
-        );
-        setShowNotification(true);
-      } finally {
-        setIsPostingToDb(false);
-        setTimeout(() => {
-          setShowNotification(false);
-        }, 2000);
-      }
-    }
-  };
 
   useEffect(() => {
     setIsFetching(true);
@@ -57,21 +23,21 @@ const Modal: React.FC<{
       setErrorHours(true);
     }
     setIsFetching(false);
-  }, [clickedDay]);
+  }, [clickedDay, takenHours]);
 
   return (
     <label htmlFor="my-modal-6" className="modal cursor-pointer">
-      <label className="modal-box relative flex flex-col justify-center align-center items-center ">
-        <div className="right-2 absolute top-2">
+      <label className="align-center modal-box relative flex flex-col items-center justify-center ">
+        <div className="absolute right-2 top-2">
           <label
             htmlFor="my-modal-6"
-            className="btn btn-sm bg-red-500 transition-all  hover:bg-red-300 text-white flex justify-center align-center items-center"
+            className="align-center btn-sm btn flex  items-center justify-center bg-red-500 text-white transition-all hover:bg-red-300"
           >
             <AiFillCloseCircle size={20} />
           </label>
         </div>
-        <p className="font-bold text-xl">Wybrany dzień to:</p>
-        <p className="text-2xl mb-8 text-blue-500">{`${clickedDay?.getDate()}.${
+        <p className="text-xl font-bold">Wybrany dzień to:</p>
+        <p className="mb-8 text-2xl text-blue-500">{`${clickedDay?.getDate()}.${
           clickedDay && clickedDay?.getMonth() + 1
         }.${clickedDay?.getFullYear()}`}</p>
         <AnimatePresence>
@@ -89,7 +55,7 @@ const Modal: React.FC<{
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="text-green-400 text-xl font-bold mb-4"
+              className="mb-4 text-xl font-bold text-green-400"
             >
               Cały dzień wolny
             </motion.p>
@@ -99,7 +65,7 @@ const Modal: React.FC<{
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-red-400 text-xl font-bold"
+                className="text-xl font-bold text-red-400"
               >
                 Zajęte godziny to:
               </motion.p>
@@ -107,69 +73,32 @@ const Modal: React.FC<{
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="mb-8 max-w-32 overflow-y-auto flex gap-2 flex-wrap justify-center items-center align-center"
+                className="max-w-32 align-center mb-8 flex flex-wrap items-center justify-center gap-2 overflow-y-auto"
               >
                 {errorHours ? (
                   <li>
                     Wystąpił błąd podczas wczytywania godzin - spróbuj ponownie
                   </li>
                 ) : (
-                  takenHours.map((day) => {
-                    return <li key={day}>{day}</li>;
+                  takenHours.map((hour) => {
+                    return (
+                      <motion.li
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        key={hour}
+                      >
+                        {hour}
+                      </motion.li>
+                    );
                   })
                 )}
               </motion.ul>
             </>
           )}
         </AnimatePresence>
-
-        <label htmlFor="hour">Wybierz godzinę:</label>
-        <input
-          name="hour"
-          type="time"
-          className="input input-bordered w-48 max-w-xs bg-slate-700"
-          step="1800"
-          ref={inputHourRef}
-          required
-        />
-        <label htmlFor="email" className="mt-8">
-          Podaj adres email:
-        </label>
-        <input
-          name="email"
-          type="email"
-          className="input input-bordered w-48 max-w-xs bg-slate-700"
-          ref={inputEmailRef}
-          required
-        />
-        <button className="btn btn-success mt-8 w-32" onClick={postToDb}>
-          {isPostingToDb ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <TailSpin />
-            </motion.div>
-          ) : (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              Zatwierdź wizytę
-            </motion.p>
-          )}
-        </button>
+        <Form clickedDay={clickedDay} takenHours={takenHours} />
       </label>
-      <AnimatePresence>
-        {showNotification && (
-          <Alert
-            errorHappened={errorHappened}
-            notificationMessage={notificationMessage}
-          />
-        )}
-      </AnimatePresence>
     </label>
   );
 };
