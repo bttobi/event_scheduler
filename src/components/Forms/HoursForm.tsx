@@ -2,12 +2,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
-import addDate from "../functions/addDate";
-import Alert from "./Alert";
-import FormInputs from "../types/FormInputs";
-import errorTypes from "../data/errorTypes";
+import addDate from "../../functions/addDate";
+import Alert from "../Alert";
+import FormInputs from "../../types/FormInputs";
+import errorTypes from "../../data/errorHourTypes";
 
-const Form: React.FC<{
+const HoursForm: React.FC<{
   clickedDay: Date | undefined;
   takenHours: string[];
 }> = ({ clickedDay, takenHours }) => {
@@ -104,34 +104,6 @@ const Form: React.FC<{
             )}
           </AnimatePresence>
         </div>
-        <label htmlFor="email" className="mt-8">
-          Podaj adres email:
-        </label>
-        <input
-          type="email"
-          className="input-bordered input w-48 max-w-xs bg-slate-700"
-          {...register("email", {
-            required: { value: true, message: "To pole jest wymagane" },
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Podaj prawidłowy email!",
-            },
-          })}
-        />
-        <div className="relative h-4">
-          <AnimatePresence>
-            {errors?.email && (
-              <motion.p
-                className="text-red-500"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                {errors?.email.message}
-              </motion.p>
-            )}
-          </AnimatePresence>
-        </div>
         <button className="btn-success btn mt-8 w-32" type="submit">
           {isPostingToDb ? (
             <motion.div
@@ -164,4 +136,4 @@ const Form: React.FC<{
   );
 };
 
-export default Form;
+export default HoursForm;
