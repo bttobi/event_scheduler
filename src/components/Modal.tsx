@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
-import Form from "./Form";
+import HoursForm from "./Forms/HoursForm";
 import getTakenHours from "../functions/getTakenHours";
 
 const Modal: React.FC<{
@@ -97,7 +97,7 @@ const Modal: React.FC<{
             </>
           )}
         </AnimatePresence>
-        <Form clickedDay={clickedDay} takenHours={takenHours} />
+        <HoursForm clickedDay={clickedDay} takenHours={takenHours} />
       </label>
     </label>
   );
