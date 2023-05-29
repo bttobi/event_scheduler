@@ -23,7 +23,6 @@ const HoursForm: React.FC<{
   } = useForm<FormInputs>({
     defaultValues: {
       hour: "00:00",
-      email: "",
     },
     mode: "onChange",
   });
@@ -40,7 +39,7 @@ const HoursForm: React.FC<{
     }
 
     try {
-      addDate(clickedDay, data.hour, data.email);
+      addDate(clickedDay, data.hour, "test@email.com");
       setErrorHappened(false);
       setNotificationMessage("Dodano rezerwację!");
       setShowNotification(true);
