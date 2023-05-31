@@ -1,5 +1,5 @@
 type RegisterInputs = {
-  email: string;
+  email_register: string;
   password_register: string;
   password_register_confirm: string;
 };
