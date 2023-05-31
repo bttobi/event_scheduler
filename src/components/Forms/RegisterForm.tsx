@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import RegisterInputs from "../../types/RegisterInputs";
 import errorRegisterTypes from "../../data/errorRegisterTypes";
+import { AnimatePresence, motion } from "framer-motion";
 
 const RegisterForm: React.FC = () => {
   const {
@@ -26,12 +27,26 @@ const RegisterForm: React.FC = () => {
     >
       <label>Email:</label>
       <input
-        {...register("email", {
+        {...register("email_register", {
           required: { value: true, message: "Pole jest wymagane" },
         })}
         type="email"
         className="input"
       />
+      <div className="relative h-4">
+        <AnimatePresence>
+          {errors?.email_register && (
+            <motion.p
+              className="text-red-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {errors?.email_register.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
       <label>Hasło:</label>
       <input
         {...register("password_register", {
@@ -40,6 +55,20 @@ const RegisterForm: React.FC = () => {
         type="password"
         className="input"
       />
+      <div className="relative h-4">
+        <AnimatePresence>
+          {errors?.password_register && (
+            <motion.p
+              className="text-red-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {errors?.password_register.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
       <label>Potwierdź hasło:</label>
       <input
         {...register("password_register_confirm", {
@@ -48,6 +77,23 @@ const RegisterForm: React.FC = () => {
         type="password"
         className="input"
       />
+      <div className="relative h-4">
+        <AnimatePresence>
+          {errors?.password_register_confirm && (
+            <motion.p
+              className="text-red-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {errors?.password_register_confirm.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+      <button type="submit" className="btn my-4">
+        ZAREJESTRUJ
+      </button>
     </form>
   );
 };
