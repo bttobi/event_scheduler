@@ -1,6 +1,6 @@
 const errorLoginTypes = [
   {
-    name: "email",
+    name: "email_login",
     type: "focus",
   },
   {
