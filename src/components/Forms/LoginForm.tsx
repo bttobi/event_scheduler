@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import LoginInputs from "../../types/LoginInputs";
 import errorLoginTypes from "../../data/errorLoginTypes";
+import { AnimatePresence, motion } from "framer-motion";
 
 const LoginForm: React.FC = () => {
   const {
@@ -26,12 +27,26 @@ const LoginForm: React.FC = () => {
     >
       <label>Email:</label>
       <input
-        {...register("email", {
+        {...register("email_login", {
           required: { value: true, message: "Pole jest wymagane" },
         })}
         type="email"
         className="input"
       />
+      <div className="relative h-4">
+        <AnimatePresence>
+          {errors?.email_login && (
+            <motion.p
+              className="text-red-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {errors?.email_login.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
       <label>Hasło:</label>
       <input
         {...register("password_login", {
@@ -40,6 +55,23 @@ const LoginForm: React.FC = () => {
         type="password"
         className="input"
       />
+      <div className="relative h-4">
+        <AnimatePresence>
+          {errors?.password_login && (
+            <motion.p
+              className="text-red-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {errors?.password_login.message}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+      <button type="submit" className="btn my-4">
+        ZALOGUJ
+      </button>
     </form>
   );
 };
