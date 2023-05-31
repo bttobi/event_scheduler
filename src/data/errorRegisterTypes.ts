@@ -1,6 +1,6 @@
 const errorLoginTypes = [
   {
-    name: "email",
+    name: "email_register",
     type: "focus",
   },
   {
