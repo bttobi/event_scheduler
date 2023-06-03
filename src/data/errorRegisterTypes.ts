@@ -1,4 +1,4 @@
-const errorLoginTypes = [
+const errorRegisterTypes = [
   {
     name: "email_register",
     type: "focus",
@@ -13,4 +13,4 @@ const errorLoginTypes = [
   },
 ];
 
-export default errorLoginTypes;
+export default errorRegisterTypes;
