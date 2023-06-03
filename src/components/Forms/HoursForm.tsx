@@ -60,7 +60,7 @@ const HoursForm: React.FC<{
   return (
     <>
       <form
-        className="align-center flex flex-col items-center justify-center"
+        className="align-center flex flex-col items-center justify-center bg-inherit"
         onSubmit={handleSubmit((data) => postToDb(data))}
         noValidate
       >
