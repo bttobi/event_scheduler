@@ -10,3 +10,22 @@ body,
   margin: 0;
   background: #06102f;
 }
+
+form {
+  background-color: #0369a1;
+}
+
+.label-default {
+  transition: all 150ms ease-in-out;
+  transform: translateY(0px);
+  transform-origin: top-left;
+}
+
+.label-form {
+  transition: all 150ms ease;
+  transform: translateY(-22px);
+  background-color: #0f172a;
+  color: white;
+  padding: 0px 2px 0px 2px;
+  border-radius: 6px;
+}
