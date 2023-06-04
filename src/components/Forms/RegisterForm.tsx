@@ -81,6 +81,14 @@ const RegisterForm: React.FC = () => {
         <input
           {...register("password_register", {
             required: { value: true, message: "Pole jest wymagane" },
+            pattern: {
+              value: /[^A-Za-z0-9]/,
+              message: "Wymagany 1 znak specjalny",
+            },
+            minLength: {
+              value: 6,
+              message: "Min. 6 znaków w haśle",
+            },
             onBlur: (e) => {
               if (e.currentTarget.value == "")
                 labelPasswordRegisterRef.current?.classList.remove(
