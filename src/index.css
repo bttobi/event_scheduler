@@ -19,6 +19,7 @@ form {
   transition: all 150ms ease-in-out;
   transform: translateY(0px);
   transform-origin: top-left;
+  pointer-events: none;
 }
 
 .label-form {
