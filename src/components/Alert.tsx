@@ -10,7 +10,7 @@ const Alert: React.FC<{
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className={
-        "alert absolute bottom-auto top-0 w-96 shadow-lg " +
+        "alert absolute bottom-auto top-10 w-96 shadow-lg " +
         (errorHappened ? "alert-error" : "alert-success")
       }
     >
