@@ -1,10 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import { getAuth, signOut } from "firebase/auth";
+import { User } from "firebase/auth";
 
 export const Navbar: React.FC = () => {
   const hamburgerInputRef = useRef<HTMLInputElement>(null);
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+  const auth = getAuth();
 
   const hideMenu = (e: Event) => {
     e.stopPropagation();
@@ -19,12 +23,22 @@ export const Navbar: React.FC = () => {
       hamburgerInputRef.current.checked = false;
   };
 
+  //TODO singOut function with alerts etc
+
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) setUser(user);
+      else setUser(null);
+    });
+
     document.body.addEventListener("click", (e) => hideMenu(e));
     return () => {
       document.body.removeEventListener("click", (e) => hideMenu(e));
+      unsubscribe();
     };
   }, []);
+
+  console.log(user?.email);
 
   return (
     <AnimatePresence>
@@ -127,7 +141,14 @@ export const Navbar: React.FC = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <button className="btn-ghost btn text-xl normal-case">Wyloguj</button>
+          {user?.email && (
+            <button
+              className="btn-ghost btn text-xl normal-case"
+              onClick={() => signOut(auth)}
+            >
+              Wyloguj
+            </button>
+          )}
         </div>
       </motion.nav>
     </AnimatePresence>
