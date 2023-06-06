@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import Modal from "../components/Modal";
+import Modal from "../components/UI/Modal";
 import getTakenDays from "../functions/getTakenDays";
 
 const Home: React.FC = () => {

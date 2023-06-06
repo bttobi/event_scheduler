@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import addDate from "../../functions/addDate";
-import Alert from "../Alert";
+import Alert from "../UI/Alert";
 import FormInputs from "../../types/FormInputs";
 import errorTypes from "../../data/errorHourTypes";
 
