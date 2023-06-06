@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { TailSpin } from "react-loading-icons";
 import LoginInputs from "../../types/LoginInputs";
 import errorLoginTypes from "../../data/errorLoginTypes";
-import Alert from "../Alert";
+import Alert from "../UI/Alert";
+import Button from "../UI/Button";
 
 const LoginForm: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -137,9 +137,7 @@ const LoginForm: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-        <button type="submit" className="btn my-4 w-32">
-          {isLoading ? <TailSpin /> : "ZALOGUJ"}
-        </button>
+        <Button text="Zaloguj" isLoading={isLoading} />
       </form>
       <AnimatePresence>
         {showAlert && (

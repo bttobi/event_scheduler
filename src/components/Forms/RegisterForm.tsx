@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { TailSpin } from "react-loading-icons";
 import RegisterInputs from "../../types/RegisterInputs";
 import errorRegisterTypes from "../../data/errorRegisterTypes";
-import Alert from "../Alert";
+import Alert from "../UI/Alert";
+import Button from "../UI/Button";
 
 const RegisterForm: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -201,9 +201,7 @@ const RegisterForm: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-        <button type="submit" className="btn my-4 w-32">
-          {isLoading ? <TailSpin /> : "ZAREJESTRUJ"}
-        </button>
+        <Button text="Zaloguj" isLoading={isLoading} />
       </form>
       <AnimatePresence>
         {showAlert && (
