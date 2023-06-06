@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { TailSpin } from "react-loading-icons";
 import LoginInputs from "../../types/LoginInputs";
 import errorLoginTypes from "../../data/errorLoginTypes";
 import Alert from "../Alert";
@@ -10,6 +11,7 @@ const LoginForm: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [errorHappened, setErrorHappened] = useState<boolean>(false);
   const [notificationMessage, setNotificationMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const labelEmailLoginRef = useRef<HTMLLabelElement>(null);
   const labelPasswordLoginRef = useRef<HTMLLabelElement>(null);
 
@@ -27,6 +29,7 @@ const LoginForm: React.FC = () => {
     //@ts-ignore
     errorLoginTypes.forEach(({ name, type }) => setError(name, { type }));
     const auth = getAuth();
+    setIsLoading(true);
     try {
       await signInWithEmailAndPassword(
         auth,
@@ -50,6 +53,7 @@ const LoginForm: React.FC = () => {
     }
 
     reset(); // reset the form
+    setIsLoading(false);
   };
 
   return (
@@ -133,8 +137,8 @@ const LoginForm: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-        <button type="submit" className="btn my-4">
-          ZALOGUJ
+        <button type="submit" className="btn my-4 w-32">
+          {isLoading ? <TailSpin /> : "ZALOGUJ"}
         </button>
       </form>
       <AnimatePresence>
