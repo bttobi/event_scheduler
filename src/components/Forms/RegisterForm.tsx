@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { TailSpin } from "react-loading-icons";
 import RegisterInputs from "../../types/RegisterInputs";
 import errorRegisterTypes from "../../data/errorRegisterTypes";
 import Alert from "../Alert";
@@ -10,6 +11,7 @@ const RegisterForm: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [errorHappened, setErrorHappened] = useState<boolean>(false);
   const [notificationMessage, setNotificationMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const labelEmailRegisterRef = useRef<HTMLLabelElement>(null);
   const labelPasswordRegisterRef = useRef<HTMLLabelElement>(null);
   const labelPasswordConfirmRegisterRef = useRef<HTMLLabelElement>(null);
@@ -29,6 +31,7 @@ const RegisterForm: React.FC = () => {
     //@ts-ignore
     errorRegisterTypes.forEach(({ name, type }) => setError(name, { type }));
     const auth = getAuth();
+    setIsLoading(true);
     try {
       await createUserWithEmailAndPassword(
         auth,
@@ -52,6 +55,7 @@ const RegisterForm: React.FC = () => {
     }
 
     reset(); //reset the form
+    setIsLoading(false);
   };
 
   return (
@@ -197,8 +201,8 @@ const RegisterForm: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-        <button type="submit" className="btn my-4">
-          ZAREJESTRUJ
+        <button type="submit" className="btn my-4 w-32">
+          {isLoading ? <TailSpin /> : "ZAREJESTRUJ"}
         </button>
       </form>
       <AnimatePresence>
