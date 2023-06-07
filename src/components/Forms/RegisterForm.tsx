@@ -6,6 +6,7 @@ import RegisterInputs from "../../types/RegisterInputs";
 import errorRegisterTypes from "../../data/errorRegisterTypes";
 import Alert from "../UI/Alert";
 import Button from "../UI/Button";
+import resolveError from "../../functions/resolveError";
 
 const RegisterForm: React.FC = () => {
   const [showAlert, setShowAlert] = useState<boolean>(false);
@@ -47,7 +48,9 @@ const RegisterForm: React.FC = () => {
       }, 2000);
     } catch (error: any) {
       setErrorHappened(true);
-      setNotificationMessage(error.code);
+      setNotificationMessage(
+        resolveError(error.code) ?? "Wystąpił błąd - spróbuj ponownie później"
+      );
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
