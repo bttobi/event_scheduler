@@ -5,7 +5,10 @@ const Button: React.FC<{ text: string; isLoading: boolean }> = ({
   isLoading,
 }) => {
   return (
-    <button type="submit" className="btn my-4 w-32">
+    <button
+      type="submit"
+      className="font-text bg-primary_button btn my-4 w-32 border-none outline-none "
+    >
       {isLoading ? <TailSpin /> : text}
     </button>
   );
