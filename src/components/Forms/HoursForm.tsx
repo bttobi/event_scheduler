@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
+import { User } from "firebase/auth";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import addDate from "../../functions/addDate";
 import Alert from "../UI/Alert";
 import FormInputs from "../../types/FormInputs";
 import errorTypes from "../../data/errorHourTypes";
+import { UserContext } from "../../App";
 
 const HoursForm: React.FC<{
   clickedDay: Date | undefined;
@@ -15,6 +17,8 @@ const HoursForm: React.FC<{
   const [notificationMessage, setNotificationMessage] = useState<string>("");
   const [showNotification, setShowNotification] = useState<boolean>(false);
   const [errorHappened, setErrorHappened] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -27,6 +31,8 @@ const HoursForm: React.FC<{
     mode: "onChange",
   });
 
+  const auth = useContext(UserContext);
+
   const postToDb = async (data: FormInputs) => {
     setIsPostingToDb(true);
     //@ts-ignore
@@ -38,7 +44,7 @@ const HoursForm: React.FC<{
     }
 
     try {
-      addDate(clickedDay, data.hour, "test@email.com");
+      addDate(clickedDay, data.hour, user?.email);
       setErrorHappened(false);
       setNotificationMessage("Dodano rezerwację!");
       setShowNotification(true);
@@ -54,6 +60,17 @@ const HoursForm: React.FC<{
       setShowNotification(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) setUser(user);
+      else setUser(null);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <>
