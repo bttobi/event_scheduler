@@ -29,7 +29,6 @@ const HoursForm: React.FC<{
 
   const postToDb = async (data: FormInputs) => {
     setIsPostingToDb(true);
-
     //@ts-ignore
     errorTypes.forEach(({ name, type }) => setError(name, { type }));
 
@@ -49,12 +48,11 @@ const HoursForm: React.FC<{
         "Błąd podczas dodawania rezerwacji - spróbuj ponownie..."
       );
       setShowNotification(true);
-    } finally {
-      setIsPostingToDb(false);
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 2000);
     }
+    setIsPostingToDb(false);
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 2000);
   };
 
   return (
@@ -67,7 +65,7 @@ const HoursForm: React.FC<{
         <label htmlFor="hour">Wybierz godzinę:</label>
         <input
           type="time"
-          className="input-bordered input w-48 max-w-xs bg-slate-700"
+          className="input-bordered input w-48 max-w-xs bg-slate-700 text-center"
           step="1800"
           {...register("hour", {
             required: { value: true, message: "To pole jest wymagane" },
@@ -104,23 +102,7 @@ const HoursForm: React.FC<{
           </AnimatePresence>
         </div>
         <button className="btn-success btn mt-8 w-32" type="submit">
-          {isPostingToDb ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <TailSpin />
-            </motion.div>
-          ) : (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              Zatwierdź wizytę
-            </motion.p>
-          )}
+          {isPostingToDb ? <TailSpin /> : "Zatwierdź wizytę"}
         </button>
       </form>
       <AnimatePresence>
