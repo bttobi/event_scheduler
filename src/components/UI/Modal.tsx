@@ -27,7 +27,7 @@ const Modal: React.FC<{
 
   return (
     <label htmlFor="my-modal-6" className="modal cursor-pointer">
-      <label className="align-center modal-box relative flex flex-col items-center justify-center ">
+      <label className="align-center modal-box flex flex-col items-center justify-center">
         <div className="absolute right-2 top-2">
           <label
             htmlFor="my-modal-6"
