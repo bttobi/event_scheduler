@@ -7,7 +7,7 @@ import BookedDates from "./pages/BookedDates";
 
 const App: React.FC = () => {
   return (
-    <main>
+    <main className="font-article">
       <BrowserRouter>
         <Navbar />
         <Routes>
