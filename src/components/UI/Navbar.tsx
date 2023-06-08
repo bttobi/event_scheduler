@@ -1,15 +1,16 @@
 import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { useState, useRef, useEffect, useContext } from "react";
+import { signOut } from "firebase/auth";
+import { UserContext } from "../../App";
 import { User } from "firebase/auth";
 
 export const Navbar: React.FC = () => {
   const hamburgerInputRef = useRef<HTMLInputElement>(null);
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const auth = getAuth();
 
+  const auth = useContext(UserContext);
   const hideMenu = (e: Event) => {
     e.stopPropagation();
     if (e.target != hamburgerInputRef.current && hamburgerInputRef.current)
@@ -38,15 +39,13 @@ export const Navbar: React.FC = () => {
     };
   }, []);
 
-  console.log(user?.email);
-
   return (
     <AnimatePresence>
       <motion.nav
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="font-header navbar bg-base-100"
+        className="navbar bg-base-100 font-header"
       >
         <div className="dropdown">
           <label
@@ -107,18 +106,22 @@ export const Navbar: React.FC = () => {
                 }}
                 className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
               >
-                <li>
-                  <NavLink to="/">Umów się</NavLink>
-                </li>
+                {user?.email && (
+                  <li>
+                    <NavLink to="/">Umów się</NavLink>
+                  </li>
+                )}
                 <li>
                   <NavLink to="/zaloguj">Zaloguj</NavLink>
                 </li>
                 <li>
                   <NavLink to="/zarejestruj">Zarejestruj</NavLink>
                 </li>
-                <li>
-                  <NavLink to="/terminy">Moje terminy</NavLink>
-                </li>
+                {user?.email && (
+                  <li>
+                    <NavLink to="/terminy">Moje terminy</NavLink>
+                  </li>
+                )}
               </motion.ul>
             )}
           </AnimatePresence>
@@ -126,18 +129,22 @@ export const Navbar: React.FC = () => {
         <div className="navbar-start"></div>
         <div className="align-center navbar-center hidden w-1/2 items-center justify-center lg:flex">
           <ul className="menu menu-horizontal flex w-full justify-evenly px-1">
-            <li>
-              <NavLink to="/">Umów się</NavLink>
-            </li>
+            {user?.email && (
+              <li>
+                <NavLink to="/">Umów się</NavLink>
+              </li>
+            )}
             <li>
               <NavLink to="/zaloguj">Zaloguj</NavLink>
             </li>
             <li>
               <NavLink to="/zarejestruj">Zarejestruj</NavLink>
             </li>
-            <li>
-              <NavLink to="/terminy">Moje terminy</NavLink>
-            </li>
+            {user?.email && (
+              <li>
+                <NavLink to="/terminy">Moje terminy</NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
