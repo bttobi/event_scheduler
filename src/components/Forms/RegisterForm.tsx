@@ -9,7 +9,7 @@ import Button from "../UI/Button";
 import resolveError from "../../functions/resolveError";
 
 const RegisterForm: React.FC = () => {
-  const [showAlert, setShowAlert] = useState<boolean>(false);
+  const [showNotification, setShowNotification] = useState<boolean>(false);
   const [errorHappened, setErrorHappened] = useState<boolean>(false);
   const [notificationMessage, setNotificationMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -42,18 +42,18 @@ const RegisterForm: React.FC = () => {
 
       setErrorHappened(false);
       setNotificationMessage("Zarejestrowano pomyślnie!");
-      setShowAlert(true);
+      setShowNotification(true);
       setTimeout(() => {
-        setShowAlert(false);
+        setShowNotification(false);
       }, 2000);
     } catch (error: any) {
       setErrorHappened(true);
       setNotificationMessage(
         resolveError(error.code) ?? "Wystąpił błąd - spróbuj ponownie później"
       );
-      setShowAlert(true);
+      setShowNotification(true);
       setTimeout(() => {
-        setShowAlert(false);
+        setShowNotification(false);
       }, 2000);
     }
 
@@ -207,7 +207,7 @@ const RegisterForm: React.FC = () => {
         <Button text="Zaloguj" isLoading={isLoading} />
       </form>
       <AnimatePresence>
-        {showAlert && (
+        {showNotification && (
           <Alert
             errorHappened={errorHappened}
             notificationMessage={notificationMessage}
