@@ -23,7 +23,7 @@ const Modal: React.FC<{
       setErrorHours(true);
     }
     setIsFetching(false);
-  }, [clickedDay, takenHours]);
+  }, [clickedDay, takenHours.length]);
 
   return (
     <label htmlFor="my-modal-6" className="modal cursor-pointer">
