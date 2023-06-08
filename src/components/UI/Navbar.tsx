@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="navbar bg-base-100"
+        className="font-header navbar bg-base-100"
       >
         <div className="dropdown">
           <label
