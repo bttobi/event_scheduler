@@ -7,9 +7,11 @@ import errorLoginTypes from "../../data/errorLoginTypes";
 import Button from "../UI/Button";
 import resolveError from "../../functions/resolveError";
 import { AlertContext } from "../../contexts/AlertContext";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const labelEmailLoginRef = useRef<HTMLLabelElement>(null);
   const labelPasswordLoginRef = useRef<HTMLLabelElement>(null);
 
@@ -108,12 +110,22 @@ const LoginForm: React.FC = () => {
             onChange: () =>
               labelPasswordLoginRef.current?.classList.add("label-form"),
           })}
-          type="password"
+          type={togglePassword ? "text" : "password"}
           className="input"
           onFocus={() =>
             labelPasswordLoginRef.current?.classList.add("label-form")
           }
         />
+        <label className="swap absolute right-3">
+          <input
+            type="checkbox"
+            onChange={() => {
+              setTogglePassword(!togglePassword);
+            }}
+          />
+          <AiFillEye className="swap-on" />
+          <AiFillEyeInvisible className="swap-off" />
+        </label>
       </div>
       <div className="relative h-4">
         <AnimatePresence>
