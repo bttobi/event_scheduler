@@ -4,15 +4,15 @@ import { useContext, useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import RegisterInputs from "../../types/RegisterInputs";
 import errorRegisterTypes from "../../data/errorRegisterTypes";
-import Alert from "../UI/Alert";
 import Button from "../UI/Button";
 import resolveError from "../../functions/resolveError";
 import { AlertContext } from "../../contexts/AlertContext";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const RegisterForm: React.FC = () => {
-  const [showNotification, setShowNotification] = useState<boolean>(false);
-  const [errorHappened, setErrorHappened] = useState<boolean>(false);
-  const [notificationMessage, setNotificationMessage] = useState<string>("");
+  const [togglePassword, setTogglePassword] = useState<boolean>(false);
+  const [toggleConfirmPassword, setToggleConfirmPassword] =
+    useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const labelEmailRegisterRef = useRef<HTMLLabelElement>(null);
   const labelPasswordRegisterRef = useRef<HTMLLabelElement>(null);
@@ -128,12 +128,22 @@ const RegisterForm: React.FC = () => {
             onChange: () =>
               labelPasswordRegisterRef.current?.classList.add("label-form"),
           })}
-          type="password"
+          type={togglePassword ? "text" : "password"}
           className="input"
           onFocus={() =>
             labelPasswordRegisterRef.current?.classList.add("label-form")
           }
         />
+        <label className="swap absolute right-3">
+          <input
+            type="checkbox"
+            onChange={() => {
+              setTogglePassword(!togglePassword);
+            }}
+          />
+          <AiFillEye className="swap-on" />
+          <AiFillEyeInvisible className="swap-off" />
+        </label>
       </div>
       <div className="relative mb-4 h-4">
         <AnimatePresence>
@@ -175,12 +185,22 @@ const RegisterForm: React.FC = () => {
                 "label-form"
               ),
           })}
-          type="password"
+          type={toggleConfirmPassword ? "text" : "password"}
           className="input"
           onFocus={() =>
             labelPasswordConfirmRegisterRef.current?.classList.add("label-form")
           }
         />
+        <label className="swap absolute right-3">
+          <input
+            type="checkbox"
+            onChange={() => {
+              setToggleConfirmPassword(!toggleConfirmPassword);
+            }}
+          />
+          <AiFillEye className="swap-on" />
+          <AiFillEyeInvisible className="swap-off" />
+        </label>
       </div>
       <div className="relative h-4 ">
         <AnimatePresence>
