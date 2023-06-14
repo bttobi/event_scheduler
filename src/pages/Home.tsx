@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import Calendar from "react-calendar";
+import { isWithinInterval } from "date-fns";
 import "react-calendar/dist/Calendar.css";
 import Modal from "../components/UI/Modal";
 import getTakenDays from "../functions/getTakenDays";
@@ -33,6 +34,16 @@ const Home: React.FC = () => {
         return "bg-red-500";
       }
     }
+  };
+
+  const isWithinRanges = (date, ranges) => {
+    return ranges.some((range) => isWithinRange(date, range));
+  };
+
+  //@ts-ignore
+  const tileDisabled = ({ date, view }) => {
+    // Check if a date React-Calendar wants to check is within any of the ranges
+    return isWithinRanges(date, disabledRanges);
   };
 
   useEffect(() => {
