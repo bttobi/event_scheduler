@@ -36,16 +36,6 @@ const Home: React.FC = () => {
     }
   };
 
-  const isWithinRanges = (date, ranges) => {
-    return ranges.some((range) => isWithinRange(date, range));
-  };
-
-  //@ts-ignore
-  const tileDisabled = ({ date, view }) => {
-    // Check if a date React-Calendar wants to check is within any of the ranges
-    return isWithinRanges(date, disabledRanges);
-  };
-
   useEffect(() => {
     const days = getTakenDays();
     days.then((res) => setTakenDays(res));
