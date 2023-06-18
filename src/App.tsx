@@ -15,7 +15,7 @@ const App: React.FC = () => {
   return (
     <UserContext.Provider value={auth}>
       <AlertProvider>
-        <main className="font-article">
+        <main className="relative font-article">
           <BrowserRouter>
             <Navbar />
             <Routes>
@@ -25,8 +25,8 @@ const App: React.FC = () => {
               <Route path="/terminy" element={<BookedDates />} />
             </Routes>
           </BrowserRouter>
+          <Alert />
         </main>
-        <Alert />
       </AlertProvider>
     </UserContext.Provider>
   );
