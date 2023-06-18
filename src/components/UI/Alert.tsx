@@ -14,7 +14,7 @@ const Alert: React.FC<{}> = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={
-            "alert absolute bottom-auto top-14 z-30 ml-auto mr-auto w-96 shadow-lg " +
+            "alert absolute bottom-auto left-0 right-0 top-16 z-30 m-auto w-96 shadow-lg " +
             (errorHappened ? "alert-error" : "alert-success")
           }
         >
