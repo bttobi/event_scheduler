@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useState, useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import LoginInputs from "../../types/LoginInputs";
@@ -14,6 +15,7 @@ const LoginForm: React.FC = () => {
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
   const labelEmailLoginRef = useRef<HTMLLabelElement>(null);
   const labelPasswordLoginRef = useRef<HTMLLabelElement>(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -49,6 +51,7 @@ const LoginForm: React.FC = () => {
 
     reset(); // reset the form
     setIsLoading(false);
+    navigate("/");
   };
 
   return (
