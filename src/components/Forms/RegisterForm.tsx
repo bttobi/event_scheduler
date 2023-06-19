@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import RegisterInputs from "../../types/RegisterInputs";
 import errorRegisterTypes from "../../data/errorRegisterTypes";
@@ -17,6 +18,7 @@ const RegisterForm: React.FC = () => {
   const labelEmailRegisterRef = useRef<HTMLLabelElement>(null);
   const labelPasswordRegisterRef = useRef<HTMLLabelElement>(null);
   const labelPasswordConfirmRegisterRef = useRef<HTMLLabelElement>(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -54,6 +56,7 @@ const RegisterForm: React.FC = () => {
 
     reset(); //reset the form
     setIsLoading(false);
+    navigate("/");
   };
 
   return (
