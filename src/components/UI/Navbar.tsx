@@ -1,16 +1,21 @@
 import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { UserContext } from "../../App";
 import { User } from "firebase/auth";
+import { AlertContext } from "../../contexts/AlertContext";
 
 export const Navbar: React.FC = () => {
   const hamburgerInputRef = useRef<HTMLInputElement>(null);
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
 
+  const { setAlert } = useContext(AlertContext);
   const auth = useContext(UserContext);
+
   const hideMenu = (e: Event) => {
     e.stopPropagation();
     if (e.target != hamburgerInputRef.current && hamburgerInputRef.current)
@@ -24,7 +29,11 @@ export const Navbar: React.FC = () => {
       hamburgerInputRef.current.checked = false;
   };
 
-  //TODO singOut function with alerts etc
+  const logOut = () => {
+    signOut(auth);
+    navigate("/zaloguj");
+    setAlert("Wylogowano pomyślnie!", true, false);
+  };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -151,7 +160,7 @@ export const Navbar: React.FC = () => {
           {user?.email && (
             <button
               className="btn-ghost btn text-xl normal-case"
-              onClick={() => signOut(auth)}
+              onClick={logOut}
             >
               Wyloguj
             </button>
