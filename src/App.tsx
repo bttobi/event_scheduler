@@ -15,7 +15,7 @@ const App: React.FC = () => {
   return (
     <UserContext.Provider value={auth}>
       <AlertProvider>
-        <main className="relative font-article">
+        <main className="align-center relative flex flex-col items-center justify-center font-article">
           <BrowserRouter>
             <Navbar />
             <Routes>
