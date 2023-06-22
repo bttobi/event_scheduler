@@ -85,7 +85,13 @@ const Home: React.FC = () => {
               className="modal-toggle"
             />
             <Modal clickedDay={clickedDay} />
-            <p className="mt-8 text-2xl text-white">Legenda:</p>
+            <div className="mt-8 flex text-2xl text-white">
+              <span>Legenda: </span>
+              <div className="ml-4 mr-4 h-8 w-8 bg-red-500 text-center text-black">
+                D
+              </div>
+              - ktoś złożył już rezerwację
+            </div>
           </>
         )}
       </motion.main>
