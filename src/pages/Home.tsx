@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import Calendar from "react-calendar";
-import { isWithinInterval } from "date-fns";
 import "react-calendar/dist/Calendar.css";
 import Modal from "../components/UI/Modal";
 import getTakenDays from "../functions/getTakenDays";
@@ -39,7 +38,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     const days = getTakenDays();
     days.then((res) => setTakenDays(res));
-    console.log(takenDays);
   }, [takenDays?.length, clickedDay]);
 
   useEffect(() => {

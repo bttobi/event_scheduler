@@ -51,7 +51,8 @@ To be added
 ### 🎯 To do:
 - implement tests,
 - fetch last 30 days of user reservations,
-- UI tweaks.
+- UI tweaks,
+- make admin panel.
 
 
 
