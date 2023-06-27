@@ -89,8 +89,10 @@ const RegisterForm: React.FC = () => {
             labelEmailRegisterRef.current?.classList.add("label-form")
           }
         />
-        // TODO NAME, SURNAME, CHECKBOX WHETHER BLACK GUNPOWDER, // NUMBER OF
-        LICENSE
+        {
+          // TODO NAME, SURNAME, CHECKBOX WHETHER BLACK GUNPOWDER,
+          // NUMBER OF LICENSE
+        }
       </div>
       <div className="relative mb-4 h-4">
         <AnimatePresence>
