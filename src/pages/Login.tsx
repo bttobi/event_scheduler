@@ -18,6 +18,9 @@ const Login = () => {
             Zarejestruj się tutaj
           </NavLink>
           <p className="mt-8">Zapomniałeś hasła?</p>
+          {
+            //TODO modal with password reset
+          }
           <button className="underline">Kliknij tutaj</button>
         </div>
       </motion.div>
