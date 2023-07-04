@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const ForgotPassModal: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   return (
     <label htmlFor="my-modal-7" className="modal cursor-pointer">
       <label className="align-center modal-box flex flex-col items-center justify-center">
