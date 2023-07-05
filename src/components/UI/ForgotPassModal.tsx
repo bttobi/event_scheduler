@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { TailSpin } from "react-loading-icons";
 
 const ForgotPassModal: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
