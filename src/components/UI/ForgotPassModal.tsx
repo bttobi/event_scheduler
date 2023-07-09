@@ -16,7 +16,10 @@ const ForgotPassModal: React.FC = () => {
           </label>
         </div>
         <p className="text-xl font-bold">Na pewno zresetować hasło?</p>
-        <button className="btn-success btn h-12">
+        <button
+          className="btn-success btn h-12"
+          onClick={() => setIsLoading(true)}
+        >
           {isLoading ? <TailSpin /> : "Wyślij email z resetem"}
         </button>
       </label>
