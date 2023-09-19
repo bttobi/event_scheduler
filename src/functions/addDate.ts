@@ -1,38 +1,43 @@
-import db from "../firebase";
-import { collection, doc, setDoc, getDoc } from "firebase/firestore";
+import db from '../firebase';
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
+
+export type ReservationEntry = {
+  day: string;
+  email: string;
+  hasPaid: boolean;
+  hour: string;
+};
 
 const addDate = async (
-  date: Date | undefined,
+  date: string,
   hour: string,
   email: string | undefined | null
 ) => {
-  console.log(email);
   if (email == null) return;
 
   if (!date) return true;
-  let errorHappened: boolean = false;
-  const stringDate = `${date.getDate()}.${
-    date.getMonth() + 1
-  }.${date.getFullYear()}`;
-  const collectionRef = await collection(db, stringDate);
-  const documentRef = await doc(collectionRef, hour);
-  const documentSnap = await getDoc(documentRef);
 
-  if (documentSnap.exists()) {
-    errorHappened = true;
-    return errorHappened;
+  const collectionDaysRef = await collection(db, 'list_of_days');
+  const documentDayRef = await doc(collectionDaysRef, date);
+  const newEntry: ReservationEntry = {
+    day: date,
+    email,
+    hasPaid: false,
+    hour,
+  };
+  const docSnap = await getDoc(documentDayRef);
+  if (docSnap.exists()) {
+    await updateDoc(documentDayRef, { data: arrayUnion(newEntry) });
+    return;
   }
-
-  await setDoc(documentRef, { hour: hour, email: email, hasPaid: false });
-
-  //setting a day to collection of days
-  const collectionDaysRef = await collection(db, "list_of_days");
-  const documentDayRef = await doc(collectionDaysRef, stringDate);
-  await setDoc(documentDayRef, { day: stringDate });
-
-  const collectionUserDaysRef = await collection(db, email);
-  const documentUserRef = await doc(collectionUserDaysRef, stringDate);
-  await setDoc(documentUserRef, { day: stringDate, hour: hour });
+  await setDoc(documentDayRef, { data: [newEntry] });
 };
 
 export default addDate;

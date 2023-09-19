@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import RegisterForm from "../components/Forms/RegisterForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { NavLink } from 'react-router-dom';
+import RegisterForm from '../components/Forms/RegisterForm';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Register = () => {
   return (

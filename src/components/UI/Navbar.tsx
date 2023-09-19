@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useRef, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { UserContext } from "../../App";
-import { User } from "firebase/auth";
-import { AlertContext } from "../../contexts/AlertContext";
+import { NavLink } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { UserContext } from '../../contexts/UserContext';
+import { User } from 'firebase/auth';
+import { AlertContext } from '../../contexts/AlertContext';
 
 export const Navbar: React.FC = () => {
   const hamburgerInputRef = useRef<HTMLInputElement>(null);
@@ -31,19 +31,19 @@ export const Navbar: React.FC = () => {
 
   const logOut = () => {
     signOut(auth);
-    navigate("/zaloguj");
-    setAlert("Wylogowano pomyślnie!", true, false);
+    navigate('/zaloguj');
+    setAlert('Wylogowano pomyślnie!', true, false);
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) setUser(user);
       else setUser(null);
     });
 
-    document.body.addEventListener("click", (e) => hideMenu(e));
+    document.body.addEventListener('click', e => hideMenu(e));
     return () => {
-      document.body.removeEventListener("click", (e) => hideMenu(e));
+      document.body.removeEventListener('click', e => hideMenu(e));
       unsubscribe();
     };
   }, []);
@@ -115,21 +115,24 @@ export const Navbar: React.FC = () => {
                 }}
                 className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
               >
-                {user?.email && (
-                  <li>
-                    <NavLink to="/">Umów się</NavLink>
-                  </li>
-                )}
-                <li>
-                  <NavLink to="/zaloguj">Zaloguj</NavLink>
-                </li>
-                <li>
-                  <NavLink to="/zarejestruj">Zarejestruj</NavLink>
-                </li>
-                {user?.email && (
-                  <li>
-                    <NavLink to="/terminy">Moje terminy</NavLink>
-                  </li>
+                {user?.email ? (
+                  <>
+                    <li>
+                      <NavLink to="/">Umów się</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/terminy">Moje terminy</NavLink>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <NavLink to="/zaloguj">Zaloguj</NavLink>
+                    </li>
+                    <li>
+                      <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+                    </li>
+                  </>
                 )}
               </motion.ul>
             )}
@@ -138,21 +141,24 @@ export const Navbar: React.FC = () => {
         <div className="navbar-start"></div>
         <div className="align-center navbar-center hidden w-1/2 items-center justify-center lg:flex">
           <ul className="menu menu-horizontal flex w-full justify-evenly px-1">
-            {user?.email && (
-              <li>
-                <NavLink to="/">Umów się</NavLink>
-              </li>
-            )}
-            <li>
-              <NavLink to="/zaloguj">Zaloguj</NavLink>
-            </li>
-            <li>
-              <NavLink to="/zarejestruj">Zarejestruj</NavLink>
-            </li>
-            {user?.email && (
-              <li>
-                <NavLink to="/terminy">Moje terminy</NavLink>
-              </li>
+            {user?.email ? (
+              <>
+                <li>
+                  <NavLink to="/">Umów się</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/terminy">Moje terminy</NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink to="/zaloguj">Zaloguj</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+                </li>
+              </>
             )}
           </ul>
         </div>

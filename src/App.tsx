@@ -1,22 +1,19 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Navbar from "./components/UI/Navbar";
-import BookedDates from "./pages/BookedDates";
-import { createContext } from "react";
-import { auth } from "./firebase.js";
-import { AlertProvider } from "./contexts/AlertProvider.js";
-import Alert from "./components/UI/Alert.js";
-
-export const UserContext = createContext(auth);
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Navbar from './components/UI/Navbar';
+import BookedDates from './pages/BookedDates';
+import { AlertProvider } from './contexts/AlertContext.js';
+import Alert from './components/UI/Alert.js';
+import { UserContextProvider } from './contexts/UserContext.js';
 
 const App: React.FC = () => {
   return (
-    <UserContext.Provider value={auth}>
+    <UserContextProvider>
       <AlertProvider>
         <main className="align-center relative flex flex-col items-center justify-center font-article">
-          <BrowserRouter>
+          <HashRouter>
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
@@ -24,11 +21,11 @@ const App: React.FC = () => {
               <Route path="/zarejestruj" element={<Register />} />
               <Route path="/terminy" element={<BookedDates />} />
             </Routes>
-          </BrowserRouter>
+          </HashRouter>
           <Alert />
         </main>
       </AlertProvider>
-    </UserContext.Provider>
+    </UserContextProvider>
   );
 };
 

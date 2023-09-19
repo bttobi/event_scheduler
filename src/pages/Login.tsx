@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import LoginForm from "../components/Forms/LoginForm";
-import { AnimatePresence, motion } from "framer-motion";
+import { NavLink } from 'react-router-dom';
+import LoginForm from '../components/Forms/LoginForm';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Login = () => {
   return (

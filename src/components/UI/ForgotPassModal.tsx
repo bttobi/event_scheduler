@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { TailSpin } from "react-loading-icons";
+import { useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { TailSpin } from 'react-loading-icons';
 
 const ForgotPassModal: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   return (
-    <label htmlFor="my-modal-7" className="modal cursor-pointer">
+    <label htmlFor="forgotpass-modal" className="modal cursor-pointer">
       <label className="align-center modal-box flex flex-col items-center justify-center">
         <div className="absolute right-2 top-2">
           <label
-            htmlFor="my-modal-7"
+            htmlFor="forgotpass-modal"
             className="align-center btn-sm btn flex  items-center justify-center bg-red-500 text-white transition-all hover:bg-red-300"
           >
             <AiFillCloseCircle size={20} />
@@ -20,7 +20,7 @@ const ForgotPassModal: React.FC = () => {
           className="btn-success btn h-12"
           onClick={() => setIsLoading(true)}
         >
-          {isLoading ? <TailSpin /> : "Wyślij email z resetem"}
+          {isLoading ? <TailSpin /> : 'Wyślij email z resetem'}
         </button>
       </label>
     </label>

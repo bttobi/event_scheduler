@@ -15,7 +15,7 @@ form {
   background-color: rgb(3 105 161);
 }
 
-input[type="time"]::-webkit-calendar-picker-indicator {
+input[type='time']::-webkit-calendar-picker-indicator {
   display: none;
 }
 
@@ -33,4 +33,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   color: white;
   padding: 0px 2px 0px 2px;
   border-radius: 6px;
+}
+
+button.react-calendar__tile:disabled {
+  background-color: rgb(239 68 68);
+  cursor: not-allowed;
 }
