@@ -40,19 +40,20 @@ Application should be hosted in your local network automatically.
 #
 
 ### 🎨 Desktop preview - current stage 
-To be added
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/a8481d40-c708-44a4-bb35-1929ca579605)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/fdfb1f7f-4d74-4b29-ae9e-407e0e3a7a4d)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/37a2afcc-a46a-4f06-9cab-3d7a3f27c498)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/7bc23bf6-de6b-4fbf-88de-820cf4482e29)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/533bab09-c4bf-4124-8160-7c140d5a1c48)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/2b15244f-1cc4-4b10-b62e-8ec92c0578f2)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/f8845bab-14c6-4fbe-8246-dee11bf59226)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/1ea3f21d-b8fd-413f-89d2-e0fb060b4fbd)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/b3a67c85-08d4-4368-877f-348fdee4ce32)
+
+
 
 ### 🎨 Mobile preview - current stage 
-To be added
-
-
-#
-
-### 🎯 To do:
-- implement tests,
-- fetch last 30 days of user reservations,
-- UI tweaks,
-- make admin panel.
+To be adde
 
 
 
