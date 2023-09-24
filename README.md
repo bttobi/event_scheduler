@@ -49,11 +49,26 @@ Application should be hosted in your local network automatically.
 ![image](https://github.com/bttobi/event_scheduler/assets/76923032/f8845bab-14c6-4fbe-8246-dee11bf59226)
 ![image](https://github.com/bttobi/event_scheduler/assets/76923032/1ea3f21d-b8fd-413f-89d2-e0fb060b4fbd)
 ![image](https://github.com/bttobi/event_scheduler/assets/76923032/b3a67c85-08d4-4368-877f-348fdee4ce32)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/7cfdf125-5a99-4730-a654-eb17cd3be62c)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/bf9eae50-3db4-4346-8b4b-7aba51098808)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/34914e6b-651f-41ba-a992-37fb515ebb66)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/438b41eb-1120-4966-a5ca-f852ab9f62f1)
 
-
+#
 
 ### 🎨 Mobile preview - current stage 
-To be adde
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/f82174b9-3e7f-4a37-83a4-ea6b20fbb429)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/3d2acbfe-7d59-428d-ba3c-89fe66d10b29)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/cd9a2e00-528f-46e3-8861-c82856c49390)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/384539fb-a7d4-419b-8d7d-979d04260bfa)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/7cff8c73-fc52-40cf-afb9-077aa339835e)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/ebd0acf3-b871-4c8d-9ff6-167936b305fc)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/ea9ee3f2-2ff5-420d-a1c4-8ecfbf8d5bc9)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/b1e26217-2f85-451c-9b56-c953fe6cf56f)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/3f6b0e79-e0e8-4e2f-97b5-54c19d0dcfc9)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/ecfcf03a-9072-4ed5-ba5a-f36367f966f4)
+![image](https://github.com/bttobi/event_scheduler/assets/76923032/8383acc9-cdf8-48f1-a90b-45da13bee3d1)
+
 
 
 
