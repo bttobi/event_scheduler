@@ -54,7 +54,7 @@ export const Navbar: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="navbar bg-base-100 font-header"
+        className="navbar fixed top-0 z-30 bg-base-100 font-header"
       >
         <div className="dropdown">
           <label
@@ -159,7 +159,8 @@ export const Navbar: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-        <div className="navbar-start"></div>
+
+        <div className="navbar-start ml-auto" />
         <div className="align-center navbar-center hidden w-1/2 items-center justify-center lg:flex">
           <ul className="menu menu-horizontal flex w-full justify-evenly px-1">
             {user?.email && user?.email !== 'admin@admin.admin' ? (

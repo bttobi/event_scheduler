@@ -10,7 +10,7 @@ const Contact = () => {
         className="align-center mt-24 flex flex-col items-center justify-center"
       >
         <ul
-          className="mt-32 w-96 rounded-lg p-8"
+          className="w-82 mt-32 rounded-lg p-8"
           style={{ background: '#0369a1' }}
         >
           <li>

@@ -10,8 +10,9 @@ body,
   margin: 0;
   background: #07080a;
   background-image: url('./public/background.jpg');
-  background-size: contain;
+  background-size: cover;
   background-blend-mode: soft-light;
+  background-repeat: no-repeat;
 }
 
 form {
