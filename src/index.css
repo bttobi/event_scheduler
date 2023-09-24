@@ -9,7 +9,7 @@ body,
   height: 100vh;
   margin: 0;
   background: #07080a;
-  background-image: url('./public/background.jpg');
+  background-image: url('../background.jpg');
   background-size: cover;
   background-blend-mode: soft-light;
   background-repeat: no-repeat;
