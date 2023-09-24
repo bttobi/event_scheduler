@@ -1,6 +1,6 @@
-import { TailSpin } from "react-loading-icons";
+import { TailSpin } from 'react-loading-icons';
 
-const Button: React.FC<{ text: string; isLoading: boolean }> = ({
+const Button: React.FC<{ text: string; isLoading?: boolean }> = ({
   text,
   isLoading,
 }) => {

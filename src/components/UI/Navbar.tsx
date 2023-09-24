@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
                 }}
                 className="dropdown-content menu rounded-box menu-compact mt-3 w-52 bg-base-100 p-2 shadow"
               >
-                {user?.email ? (
+                {user?.email && user?.email !== 'admin@admin.admin' ? (
                   <>
                     <li>
                       <NavLink to="/">Umów się</NavLink>
@@ -123,16 +123,37 @@ export const Navbar: React.FC = () => {
                     <li>
                       <NavLink to="/terminy">Moje terminy</NavLink>
                     </li>
+                    {user?.email !== 'test@gmail.com' && (
+                      <li>
+                        <NavLink to="/profil">Profil</NavLink>
+                      </li>
+                    )}
                   </>
                 ) : (
+                  user?.email !== 'admin@admin.admin' && (
+                    <>
+                      <li>
+                        <NavLink to="/zaloguj">Zaloguj</NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+                      </li>
+                    </>
+                  )
+                )}
+                {user?.email === 'admin@admin.admin' ? (
                   <>
                     <li>
-                      <NavLink to="/zaloguj">Zaloguj</NavLink>
+                      <NavLink to="/usun-rezerwacje">Rezerwacje</NavLink>
                     </li>
                     <li>
-                      <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+                      <NavLink to="/zablokuj-date">Zablokuj datę</NavLink>
                     </li>
                   </>
+                ) : (
+                  <li>
+                    <NavLink to="/kontakt">Kontakt</NavLink>
+                  </li>
                 )}
               </motion.ul>
             )}
@@ -141,7 +162,7 @@ export const Navbar: React.FC = () => {
         <div className="navbar-start"></div>
         <div className="align-center navbar-center hidden w-1/2 items-center justify-center lg:flex">
           <ul className="menu menu-horizontal flex w-full justify-evenly px-1">
-            {user?.email ? (
+            {user?.email && user?.email !== 'admin@admin.admin' ? (
               <>
                 <li>
                   <NavLink to="/">Umów się</NavLink>
@@ -149,16 +170,37 @@ export const Navbar: React.FC = () => {
                 <li>
                   <NavLink to="/terminy">Moje terminy</NavLink>
                 </li>
+                {user?.email !== 'test@gmail.com' && (
+                  <li>
+                    <NavLink to="/profil">Profil</NavLink>
+                  </li>
+                )}
               </>
             ) : (
+              user?.email !== 'admin@admin.admin' && (
+                <>
+                  <li>
+                    <NavLink to="/zaloguj">Zaloguj</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+                  </li>
+                </>
+              )
+            )}
+            {user?.email === 'admin@admin.admin' ? (
               <>
                 <li>
-                  <NavLink to="/zaloguj">Zaloguj</NavLink>
+                  <NavLink to="/usun-rezerwacje">Rezerwacje</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/zarejestruj">Zarejestruj</NavLink>
+                  <NavLink to="/zablokuj-date">Zablokuj datę</NavLink>
                 </li>
               </>
+            ) : (
+              <li>
+                <NavLink to="/kontakt">Kontakt</NavLink>
+              </li>
             )}
           </ul>
         </div>

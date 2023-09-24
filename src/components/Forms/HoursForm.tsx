@@ -8,7 +8,7 @@ import errorTypes from '../../data/errorHourTypes';
 import { UserContext } from '../../contexts/UserContext';
 import { AlertContext } from '../../contexts/AlertContext';
 import useGetTakenHours from '../hooks/useGetTakenHours';
-import useGetLast30Days from '../hooks/useGetLast30Days';
+import useGetLast30Days from '../hooks/useGetLastReservedDays';
 
 const HoursForm: React.FC<{
   clickedDay: string;

@@ -1,14 +1,14 @@
-import { useForm } from "react-hook-form";
-import { AnimatePresence, motion } from "framer-motion";
-import { useContext, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import RegisterInputs from "../../types/RegisterInputs";
-import errorRegisterTypes from "../../data/errorRegisterTypes";
-import Button from "../UI/Button";
-import resolveError from "../../functions/resolveError";
-import { AlertContext } from "../../contexts/AlertContext";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useForm } from 'react-hook-form';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useContext, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import RegisterInputs from '../../types/RegisterInputs';
+import errorRegisterTypes from '../../data/errorRegisterTypes';
+import Button from '../UI/Button';
+import resolveError from '../../functions/resolveError';
+import { AlertContext } from '../../contexts/AlertContext';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 const RegisterForm: React.FC = () => {
   const [togglePassword, setTogglePassword] = useState<boolean>(false);
@@ -28,12 +28,13 @@ const RegisterForm: React.FC = () => {
     reset,
     formState: { errors },
   } = useForm<RegisterInputs>({
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const { setAlert } = useContext(AlertContext);
 
   const registerUser = async (data: RegisterInputs) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     errorRegisterTypes.forEach(({ name, type }) => setError(name, { type }));
     const auth = getAuth();
@@ -45,10 +46,10 @@ const RegisterForm: React.FC = () => {
         data.password_register
       );
 
-      setAlert("Zarejestrowano pomyślnie!", true, false);
+      setAlert('Zarejestrowano pomyślnie!', true, false);
     } catch (error: any) {
       setAlert(
-        resolveError(error.code) ?? "Wystąpił błąd - spróbuj ponownie później",
+        resolveError(error.code) ?? 'Wystąpił błąd - spróbuj ponownie później',
         true,
         true
       );
@@ -56,12 +57,12 @@ const RegisterForm: React.FC = () => {
 
     reset(); //reset the form
     setIsLoading(false);
-    navigate("/");
+    navigate('/');
   };
 
   return (
     <form
-      onSubmit={handleSubmit((data) => registerUser(data))}
+      onSubmit={handleSubmit(data => registerUser(data))}
       className="align-center flex w-min flex-col items-center justify-center gap-2 rounded-lg px-10 py-4 pb-0 text-slate-400"
       noValidate
     >
@@ -70,23 +71,23 @@ const RegisterForm: React.FC = () => {
           Email
         </label>
         <input
-          {...register("email_register", {
-            required: { value: true, message: "Pole jest wymagane" },
+          {...register('email_register', {
+            required: { value: true, message: 'Pole jest wymagane' },
             pattern: {
               value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-              message: "Wprowadź adres email",
+              message: 'Wprowadź adres email',
             },
-            onBlur: (e) => {
-              if (e.currentTarget.value == "")
-                labelEmailRegisterRef.current?.classList.remove("label-form");
+            onBlur: e => {
+              if (e.currentTarget.value === '')
+                labelEmailRegisterRef.current?.classList.remove('label-form');
             },
             onChange: () =>
-              labelEmailRegisterRef.current?.classList.add("label-form"),
+              labelEmailRegisterRef.current?.classList.add('label-form'),
           })}
           type="email"
           className="input"
           onFocus={() =>
-            labelEmailRegisterRef.current?.classList.add("label-form")
+            labelEmailRegisterRef.current?.classList.add('label-form')
           }
         />
         {
@@ -116,29 +117,29 @@ const RegisterForm: React.FC = () => {
           Hasło
         </label>
         <input
-          {...register("password_register", {
-            required: { value: true, message: "Pole jest wymagane" },
+          {...register('password_register', {
+            required: { value: true, message: 'Pole jest wymagane' },
             pattern: {
               value: /[^A-Za-z0-9]/,
-              message: "Wymagany 1 znak specjalny",
+              message: 'Wymagany 1 znak specjalny',
             },
             minLength: {
               value: 6,
-              message: "Min. 6 znaków w haśle",
+              message: 'Min. 6 znaków w haśle',
             },
-            onBlur: (e) => {
-              if (e.currentTarget.value == "")
+            onBlur: e => {
+              if (e.currentTarget.value === '')
                 labelPasswordRegisterRef.current?.classList.remove(
-                  "label-form"
+                  'label-form'
                 );
             },
             onChange: () =>
-              labelPasswordRegisterRef.current?.classList.add("label-form"),
+              labelPasswordRegisterRef.current?.classList.add('label-form'),
           })}
-          type={togglePassword ? "text" : "password"}
+          type={togglePassword ? 'text' : 'password'}
           className="input"
           onFocus={() =>
-            labelPasswordRegisterRef.current?.classList.add("label-form")
+            labelPasswordRegisterRef.current?.classList.add('label-form')
           }
         />
         <label className="swap absolute right-3">
@@ -174,28 +175,28 @@ const RegisterForm: React.FC = () => {
           Powtórz hasło
         </label>
         <input
-          {...register("password_register_confirm", {
-            required: { value: true, message: "Pole jest wymagane" },
+          {...register('password_register_confirm', {
+            required: { value: true, message: 'Pole jest wymagane' },
             validate: (val: string) => {
-              if (watch("password_register") != val) {
-                return "Hasła nie są zgodne";
+              if (watch('password_register') != val) {
+                return 'Hasła nie są zgodne';
               }
             },
-            onBlur: (e) => {
-              if (e.currentTarget.value == "")
+            onBlur: e => {
+              if (e.currentTarget.value === '')
                 labelPasswordConfirmRegisterRef.current?.classList.remove(
-                  "label-form"
+                  'label-form'
                 );
             },
             onChange: () =>
               labelPasswordConfirmRegisterRef.current?.classList.add(
-                "label-form"
+                'label-form'
               ),
           })}
-          type={toggleConfirmPassword ? "text" : "password"}
+          type={toggleConfirmPassword ? 'text' : 'password'}
           className="input"
           onFocus={() =>
-            labelPasswordConfirmRegisterRef.current?.classList.add("label-form")
+            labelPasswordConfirmRegisterRef.current?.classList.add('label-form')
           }
         />
         <label className="swap absolute right-3">
@@ -223,7 +224,7 @@ const RegisterForm: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
-      <Button text="Zaloguj" isLoading={isLoading} />
+      <Button text="Zarejestruj" isLoading={isLoading} />
     </form>
   );
 };

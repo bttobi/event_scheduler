@@ -12,7 +12,7 @@ body,
 }
 
 form {
-  background-color: rgb(3 105 161);
+  background-color: #0369a1;
 }
 
 input[type='time']::-webkit-calendar-picker-indicator {
@@ -38,4 +38,25 @@ input[type='time']::-webkit-calendar-picker-indicator {
 button.react-calendar__tile:disabled {
   background-color: rgb(239 68 68);
   cursor: not-allowed;
+}
+
+.modal {
+  z-index: 40;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(180, 198, 239);
+  border-radius: 45px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(142, 170, 235);
 }

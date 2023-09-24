@@ -1,14 +1,14 @@
-import { useForm } from "react-hook-form";
-import { useState, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import LoginInputs from "../../types/LoginInputs";
-import errorLoginTypes from "../../data/errorLoginTypes";
-import Button from "../UI/Button";
-import resolveError from "../../functions/resolveError";
-import { AlertContext } from "../../contexts/AlertContext";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useForm } from 'react-hook-form';
+import { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import LoginInputs from '../../types/LoginInputs';
+import errorLoginTypes from '../../data/errorLoginTypes';
+import Button from '../UI/Button';
+import resolveError from '../../functions/resolveError';
+import { AlertContext } from '../../contexts/AlertContext';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 const LoginForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -24,12 +24,13 @@ const LoginForm: React.FC = () => {
     reset,
     formState: { errors },
   } = useForm<LoginInputs>({
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const { setAlert } = useContext(AlertContext);
 
   const loginUser = async (data: LoginInputs) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     errorLoginTypes.forEach(({ name, type }) => setError(name, { type }));
     const auth = getAuth();
@@ -40,10 +41,13 @@ const LoginForm: React.FC = () => {
         data.email_login,
         data.password_login
       );
-      setAlert("Zalogowano pomyślnie!", true, false);
+      setAlert('Zalogowano pomyślnie!', true, false);
+
+      if (data.email_login === 'admin@admin.admin')
+        navigate('/usun-rezerwacje');
     } catch (error: any) {
       setAlert(
-        resolveError(error.code) ?? "Wystąpił błąd - spróbuj ponownie później",
+        resolveError(error.code) ?? 'Wystąpił błąd - spróbuj ponownie później',
         true,
         true
       );
@@ -51,12 +55,12 @@ const LoginForm: React.FC = () => {
 
     reset(); // reset the form
     setIsLoading(false);
-    navigate("/");
+    if (data.email_login !== 'admin@admin.admin') navigate('/');
   };
 
   return (
     <form
-      onSubmit={handleSubmit((data) => loginUser(data))}
+      onSubmit={handleSubmit(data => loginUser(data))}
       className="align-center flex w-min flex-col items-center justify-center gap-2 rounded-lg px-10 py-4 pb-0 text-slate-400"
       noValidate
     >
@@ -65,23 +69,23 @@ const LoginForm: React.FC = () => {
           Email
         </label>
         <input
-          {...register("email_login", {
-            required: { value: true, message: "Pole jest wymagane" },
+          {...register('email_login', {
+            required: { value: true, message: 'Pole jest wymagane' },
             pattern: {
               value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
-              message: "Wprowadź adres email",
+              message: 'Wprowadź adres email',
             },
-            onBlur: (e) => {
-              if (e.currentTarget.value == "")
-                labelEmailLoginRef.current?.classList.remove("label-form");
+            onBlur: e => {
+              if (e.currentTarget.value === '')
+                labelEmailLoginRef.current?.classList.remove('label-form');
             },
             onChange: () =>
-              labelEmailLoginRef.current?.classList.add("label-form"),
+              labelEmailLoginRef.current?.classList.add('label-form'),
           })}
           type="email"
           className="input"
           onFocus={() =>
-            labelEmailLoginRef.current?.classList.add("label-form")
+            labelEmailLoginRef.current?.classList.add('label-form')
           }
         />
       </div>
@@ -104,19 +108,19 @@ const LoginForm: React.FC = () => {
           Hasło
         </label>
         <input
-          {...register("password_login", {
-            required: { value: true, message: "Pole jest wymagane" },
-            onBlur: (e) => {
-              if (e.currentTarget.value == "")
-                labelPasswordLoginRef.current?.classList.remove("label-form");
+          {...register('password_login', {
+            required: { value: true, message: 'Pole jest wymagane' },
+            onBlur: e => {
+              if (e.currentTarget.value === '')
+                labelPasswordLoginRef.current?.classList.remove('label-form');
             },
             onChange: () =>
-              labelPasswordLoginRef.current?.classList.add("label-form"),
+              labelPasswordLoginRef.current?.classList.add('label-form'),
           })}
-          type={togglePassword ? "text" : "password"}
+          type={togglePassword ? 'text' : 'password'}
           className="input"
           onFocus={() =>
-            labelPasswordLoginRef.current?.classList.add("label-form")
+            labelPasswordLoginRef.current?.classList.add('label-form')
           }
         />
         <label className="swap absolute right-3">

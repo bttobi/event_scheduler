@@ -6,7 +6,7 @@ type BookedDate = {
   hour: string;
 };
 
-const useGetLast30Days = (userEmail: string) => {
+const useGetLastReservedDays = (userEmail: string) => {
   const takenDays = useGetTakenDays();
 
   return takenDays
@@ -19,4 +19,4 @@ const useGetLast30Days = (userEmail: string) => {
     });
 };
 
-export default useGetLast30Days;
+export default useGetLastReservedDays;

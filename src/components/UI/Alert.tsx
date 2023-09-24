@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { AlertContext } from "../../contexts/AlertContext";
+import { useContext } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { AlertContext } from '../../contexts/AlertContext';
 
-const Alert: React.FC<{}> = () => {
+const Alert: React.FC = () => {
   const { notificationMessage, isVisible, errorHappened } =
     useContext(AlertContext);
 
@@ -14,8 +14,8 @@ const Alert: React.FC<{}> = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={
-            "alert absolute bottom-auto left-0 right-0 top-20 z-30 m-auto w-96 shadow-lg " +
-            (errorHappened ? "alert-error" : "alert-success")
+            'alert absolute bottom-auto left-0 right-0 top-20 z-50 m-auto w-96 shadow-lg ' +
+            (errorHappened ? 'alert-error' : 'alert-success')
           }
         >
           <div>
