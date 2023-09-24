@@ -33,7 +33,7 @@ const ForgotPassModal: React.FC = () => {
       .then(() => {
         setAlert('Wysłano email z resetem hasła!', true, false);
       })
-      .catch((error: unknown) => {
+      .catch(() => {
         setAlert('Wystąpił błąd spróbuj ponownie później...', true, true);
       });
     setIsLoading(false);

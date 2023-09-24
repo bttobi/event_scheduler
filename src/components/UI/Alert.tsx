@@ -14,11 +14,11 @@ const Alert: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={
-            'alert absolute bottom-auto left-0 right-0 top-20 z-50 m-auto w-96 shadow-lg ' +
+            'alert absolute bottom-auto left-0 right-0 top-20 z-50 m-auto w-fit shadow-lg ' +
             (errorHappened ? 'alert-error' : 'alert-success')
           }
         >
-          <div>
+          <div className="w-content flex justify-start">
             {!errorHappened ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"

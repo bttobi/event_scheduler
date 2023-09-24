@@ -27,7 +27,7 @@ type GLTFResult = GLTF & {
 
 export function M16(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('./m16_a2_rifle.glb') as GLTFResult;
-  const m16ref = useRef(null);
+  const m16ref = useRef<any>(null);
 
   useFrame(() => {
     if (m16ref.current) m16ref.current.rotation.y += 0.01;

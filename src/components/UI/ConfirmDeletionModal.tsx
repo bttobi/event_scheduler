@@ -18,7 +18,7 @@ const ConfirmDeletionModal: React.FC<{
       .then(() => {
         setAlert('Usunięto rezerwację!', true, false);
       })
-      .catch((error: unknown) => {
+      .catch(() => {
         setAlert('Błąd podczas usuwania, spróbuj później...', true, false);
       });
     setIsLoading(false);

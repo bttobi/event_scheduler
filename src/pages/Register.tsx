@@ -9,7 +9,7 @@ const Register = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="align-center mt-24 flex flex-col items-center justify-center"
+        className="align-center mt-36 flex flex-col items-center justify-center"
       >
         <RegisterForm />
         <div className="align-center mt-16 flex flex-col items-center justify-center">

@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { TailSpin } from 'react-loading-icons';
-import { ErrorFn, getAuth, updateEmail } from 'firebase/auth';
+import { getAuth, updateEmail } from 'firebase/auth';
 import { AlertContext } from '../../contexts/AlertContext';
 import { useForm } from 'react-hook-form';
 import errorPassResetTypes from '../../data/errorPassResetTypes';

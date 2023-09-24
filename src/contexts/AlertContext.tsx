@@ -11,7 +11,8 @@ export const AlertContext = createContext<AlertContextType>({
   notificationMessage: '',
   isVisible: false,
   errorHappened: false,
-  setAlert: (message: string, visibility: boolean, error: boolean) => undefined,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setAlert: () => undefined,
 });
 
 export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
@@ -33,6 +34,7 @@ export const AlertProvider: React.FC<{ children: React.ReactNode }> = ({
     setTimeout(() => {
       setIsVisible(false);
     }, 2000);
+    return;
   };
 
   return (

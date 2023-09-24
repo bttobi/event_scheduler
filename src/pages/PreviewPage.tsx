@@ -11,7 +11,7 @@ const PreviewPage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="align-center mt-12 flex flex-col items-center justify-center"
+        className="align-center mt-12 flex h-full flex-col items-center justify-center"
       >
         <p className="text-center text-3xl">
           WITAMY NA STRONIE NASZEJ STRZELNICY!
@@ -24,7 +24,7 @@ const PreviewPage = () => {
             <M16 />
           </Canvas>
           <NavLink to="zaloguj">
-            <p className="mt-12 text-center text-2xl underline">
+            <p className="mt-6 text-center text-2xl underline">
               Musisz się zalogować, aby złożyć rezerwację!
             </p>
           </NavLink>
