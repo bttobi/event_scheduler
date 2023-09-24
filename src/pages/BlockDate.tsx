@@ -25,6 +25,8 @@ const BlockDate = () => {
       const day = blockedDays?.find(day => day === stringifyDate(date));
       if (day) {
         return 'bg-green-500';
+      } else {
+        return 'bg-sky-500';
       }
     }
   };
@@ -90,7 +92,7 @@ const BlockDate = () => {
       </motion.div>
     </AnimatePresence>
   ) : (
-    'BRAK DOSTĘPU - NIE JESTEŚ ADMINISTRATOREM'
+    <div>BRAK DOSTĘPU - NIE JESTEŚ ADMINISTRATOREM</div>
   );
 };
 

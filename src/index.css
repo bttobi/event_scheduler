@@ -8,7 +8,10 @@ body,
   width: 100vw;
   height: 100vh;
   margin: 0;
-  background: #070e29;
+  background: #07080a;
+  background-image: url('./public/background.jpg');
+  background-size: contain;
+  background-blend-mode: soft-light;
 }
 
 form {

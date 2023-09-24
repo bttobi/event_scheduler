@@ -37,6 +37,8 @@ const Home: React.FC = () => {
         return 'bg-orange-500';
       } else if (day?.data?.length >= 3) {
         return 'bg-red-500 disabled';
+      } else {
+        return 'bg-sky-500';
       }
     }
   };
@@ -96,6 +98,12 @@ const Home: React.FC = () => {
             <ReservationModal clickedDay={clickedDay} />
             <ul className="mt-8 flex flex-col items-center justify-start text-2xl text-white">
               <span>Legenda: </span>
+              <li className="mb-2 flex w-full">
+                <div className="ml-4 mr-4 h-8 w-10 bg-sky-500 text-center text-black">
+                  DD
+                </div>
+                - dni bez rezerwacji
+              </li>
               <li className="mb-2 flex w-full">
                 <div className="ml-4 mr-4 h-8 w-10 bg-yellow-500 text-center text-black">
                   DD

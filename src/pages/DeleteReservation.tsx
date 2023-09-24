@@ -14,8 +14,6 @@ const DeleteReservation = () => {
   const auth = useContext(UserContext);
   const takenDays = useGetTakenDays();
 
-  console.log(takenDays?.map(el => el.data).flat());
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) setEmail(user?.email || '');
@@ -80,7 +78,7 @@ const DeleteReservation = () => {
       </motion.div>
     </AnimatePresence>
   ) : (
-    'BRAK DOSTĘPU - NIE JESTEŚ ADMINISTRATOREM'
+    <div>BRAK DOSTĘPU - NIE JESTEŚ ADMINISTRATOREM</div>
   );
 };
 
